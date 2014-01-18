@@ -1,0 +1,9 @@
+{
+  "_id" : "_design/attachment",
+  "_attachments" : {
+    "attachment" : {
+      "data" : "SGVsbG8gV29ybGQhCg==",
+      "content_type" : "application/octet-stream"
+    }
+  }
+}
