@@ -7,6 +7,11 @@ var glob = require('glob');
 var mime = require('mime');
 var async = require('async');
 
+// trim whitespace
+function trim(value) {
+  return value.replace(/^\s+|\s+$/g, '');
+}
+
 // Recursively transform an object into a JSON compatible representation
 // and preserve methods by calling toString() on the function objects.
 function objToJson(obj) {
@@ -104,7 +109,7 @@ function compileDirectory(dir, options, callback) {
               err = e;
             }
           } else {
-            part[key] = data.trim();
+            part[key] = trim(data);
           }
         }
 

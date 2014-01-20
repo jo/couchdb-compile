@@ -1,6 +1,6 @@
 {
   "name": "couch-compile",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Build CouchDB documents from fs.",
   "main": "index.js",
   "bin": {

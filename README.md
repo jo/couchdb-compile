@@ -1,4 +1,4 @@
-couch-compile
+couch-compile [![Build Status](https://secure.travis-ci.org/jo/couch-compile.png?branch=master)](http://travis-ci.org/jo/couch-compile)
 =============
 Build CouchDB documents from directory, JSON or module.
 
