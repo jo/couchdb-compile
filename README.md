@@ -1,17 +1,5 @@
 couch-compile
 =============
-
-TODO
-----
-
-* test examples from http://couchapp.org/page/filesystem-mapping and https://github.com/couchapp/couchapp/wiki/Complete-Filesystem-to-Design-Doc-Mapping-Example
-* docs
-* check what happens with modules with attachments
-* multipart support
-* webapp dir support
-* vendor support
-
-
 Build CouchDB documents from directory, JSON or module.
 
 ```js
