@@ -1,10 +1,10 @@
 {
   "name": "couch-compile",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Build CouchDB documents from fs.",
   "main": "index.js",
   "bin": {
-    "couch-compile": "./bin.js"
+    "couch-compile": "./cli.js"
   },
   "scripts": {
     "test": "tap test/*.js"
@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/jo/couch-compile",
   "dependencies": {
-    "mime": "~1.2.11",
-    "async": "~0.2.9",
-    "glob": "~3.2.8"
+    "mime": "^1.2.11",
+    "async": "^0.2.10",
+    "glob": "^3.2.11"
   },
   "devDependencies": {
     "tap": "~0.4.8"

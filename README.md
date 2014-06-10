@@ -1,6 +1,7 @@
-couch-compile [![Build Status](https://secure.travis-ci.org/jo/couch-compile.png?branch=master)](http://travis-ci.org/jo/couch-compile)
-=============
+# couch-compile
 Build CouchDB documents from directory, JSON or module.
+
+[![Build Status](https://secure.travis-ci.org/jo/couch-compile.png?branch=master)](http://travis-ci.org/jo/couch-compile)
 
 ```js
 var compile = require('couch-compile');
@@ -9,8 +10,7 @@ compile(process.args[2], function(err, doc) {
 });
 ```
 
-Usage
------
+## Usage
 `compile(directory, [options], callback)`
 
 ### `Options`
@@ -19,9 +19,19 @@ Currently there are no `options` supported.
 ### `callback`
 `callback` is called with two arguments: `error` and `doc`.
 
+### CLI
+A simple commandline client is included:
+```shell
+npm install -g couch-compile
+```
 
-The Couch Directory Tree
-------------------------
+Give it a directory, or use the current one:
+```shell
+couch-compile path/to/couch/dir
+```
+
+
+## The Couch Directory Tree
 `couch-compile` uses a filesystem mapping similar to [Couchapp python tool](http://couchapp.org/page/couchapp-python)
 and [Erika](https://github.com/benoitc/erica):
 [The Couchapp Filesystem Mapping](http://couchapp.org/page/filesystem-mapping).
@@ -82,11 +92,11 @@ The `content\_type` is computed using [mime](https://github.com/broofa/node-mime
 Read more about [Inline Attachments](http://wiki.apache.org/couchdb/HTTP_Document_API#Inline_Attachments).
 
 
-Testing
--------
+## Testing
 Run the testsuite with
 ```shell
 npm test
 ```
 
-(c) 2014 Johannes J. Schmidt, TF, MIT License
+(c) 2014 Johannes J. Schmidt, TF  
+MIT License
