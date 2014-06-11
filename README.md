@@ -5,7 +5,7 @@ Build CouchDB documents from directory, JSON or module.
 
 ```js
 var compile = require('couch-compile');
-compile(process.args[2], function(err, doc) {
+compile('/path/to/my/couch/app', function(err, doc) {
   // push
 });
 ```
