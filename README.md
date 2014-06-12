@@ -5,7 +5,7 @@ Build CouchDB documents from directory, JSON or module.
 
 ```js
 var compile = require('couch-compile');
-compile('/path/to/my/couch/app', function(err, doc) {
+compile('/my/couch/app', function(err, doc) {
   // push
 });
 ```
@@ -14,12 +14,24 @@ compile('/path/to/my/couch/app', function(err, doc) {
 `compile(directory, [options], callback)`
 
 ### `Options`
-Currently there are no `options` supported.
+When `options.multipart` is true, attachments are handled as multipart.
 
 ### `callback`
 `callback` is called with two arguments: `error` and `doc`.
+In case `options.multipart` is set, `callback` is called with a third argument:
+`attachments`. This is a multipart attachments array as required by
+[nanos `db.multipart.insert`](https://github.com/dscape/nano#dbmultipartinsertdoc-attachments-params-callback):
+```js
+{
+  name: 'rabbit.png',
+  content_type: 'image/png',
+  data: <Buffer>
+}
+```
+`data` can be a `Buffer` or a `String`.
 
-### CLI
+
+## CLI
 A simple commandline client is included:
 ```shell
 npm install -g couch-compile
@@ -27,7 +39,7 @@ npm install -g couch-compile
 
 Give it a directory, or use the current one:
 ```shell
-couch-compile path/to/couch/dir
+couch-compile /my/couch/app
 ```
 
 

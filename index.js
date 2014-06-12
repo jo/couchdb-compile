@@ -24,7 +24,7 @@ function objToJson(obj) {
 }
 
 // Compile a Couchapp module.
-function compileModule(filename, callback) {
+function compileModule(filename, options, callback) {
   var doc;
   var err;
 
@@ -42,7 +42,7 @@ function compileModule(filename, callback) {
 }
 
 // Read and parse JSON documents.
-function compileJSON(filename, callback) {
+function compileJSON(filename, options, callback) {
   fs.readFile(filename, function(err, data) {
     if (err) {
       return callback(err);
@@ -55,6 +55,7 @@ function compileJSON(filename, callback) {
 // Compile a directory.
 function compileDirectory(dir, options, callback) {
   var doc = {};
+  var attachments = [];
   
   function readFile(filename, done) {
     fs.stat(filename, function(err, stats) {
@@ -79,24 +80,32 @@ function compileDirectory(dir, options, callback) {
           return done(err);
         }
 
-        var err;
-        var key;
-
         if (parts[0] === '_attachments') {
           parts.shift();
-          key = parts.join('/');
-          doc._attachments = doc._attachments || {};
-          doc._attachments[key] = {
-            data: data.toString('base64'),
-            content_type: mime.lookup(filename)
-          };
+          var name = parts.join('/');
+          var contentType = mime.lookup(filename);
+
+          if (options.multipart) {
+            attachments.push({
+              name: name,
+              data: data,
+              content_type: contentType
+            });
+          } else {
+            doc._attachments = doc._attachments || {};
+            doc._attachments[name] = {
+              data: data.toString('base64'),
+              content_type: contentType
+            };
+          }
         } else {
-          key = parts.pop().replace(/\.[^\.]*$/, '');
+          var key = parts.pop().replace(/\.[^\.]*$/, '');
           var part = parts.reduce(function(result, key) {
             result[key] = result[key] || {};
             return result[key];
           }, doc);
 
+          var err;
           if (filename.match(/\.json$/)) {
             try {
               part[key] = JSON.parse(data);
@@ -127,7 +136,11 @@ function compileDirectory(dir, options, callback) {
         return callback(err);
       }
 
-      callback(null, doc);
+      if (options.multipart) {
+        callback(null, doc, attachments);
+      } else {
+        callback(null, doc);
+      }
     });
   });
 };
@@ -162,11 +175,11 @@ module.exports = function compile(source, options, callback) {
 
     switch (path.extname(source)) {
       case '.js':
-        compileModule(source, callback);
+        compileModule(source, options, callback);
         break;
 
       case '.json':
-        compileJSON(source, callback);
+        compileJSON(source, options, callback);
         break;
 
       default:
