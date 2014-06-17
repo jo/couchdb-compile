@@ -154,6 +154,7 @@ module.exports = function compile(source, options, callback) {
     callback = options;
     options = {};
   }
+  options = options || {};
 
   // resolve absolute path
   source = path.resolve(process.cwd(), source);
