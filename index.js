@@ -7,6 +7,36 @@ var glob = require('glob');
 var mime = require('mime');
 var async = require('async');
 
+// kudos: http://stackoverflow.com/a/646643
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (str){
+    return this.slice(0, str.length) == str;
+  };
+}
+// kudos: https://github.com/mikeal/node.couchapp.js/blob/fa4e0858630706ca720ec860eb07faf1a8aece97/main.js
+// utility function to detect filtered files
+var filterByIgnore = function(f, ignoreFilesArr){
+  var match=false;
+  ignoreFilesArr.forEach(
+    function(exp,i,arr){
+      var trimmedEx = exp.trim()
+      if (trimmedEx.startsWith('[') || trimmedEx.startsWith(']')) {
+      } else if (trimmedEx.startsWith('//')) {
+      } else if (trimmedEx == '') {
+      } else {
+        var regexed = trimmedEx.replace(/^"(.+(?="$))"$/, '$1');
+        if(new RegExp(regexed).test(f))
+        {
+          match=true;
+          console.log("Ignoring file: " + JSON.stringify(f) + " matching ignore rule: '" + trimmedEx + "'");
+        } else {
+          //console.log("File passes: " + JSON.stringify(f) + " ignore rule: '" + trimmedEx + "'");
+        }
+      }
+    });
+  return match;
+}
+
 // Recursively transform an object into a JSON compatible representation
 // and preserve methods by calling toString() on the function objects.
 function objToJson(obj) {
@@ -65,6 +95,14 @@ function compileDirectory(dir, options, callback) {
 
       // only handle files
       if (!stats.isFile()) {
+        return done(null);
+      }
+
+      ignoreFiles = options.ignoreFiles;
+      var isIgnored = filterByIgnore(filename, ignoreFiles);
+
+      if (isIgnored) {
+        console.log("isIgnored: " + JSON.stringify(filename));
         return done(null);
       }
 
