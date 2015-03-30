@@ -98,12 +98,13 @@ function compileDirectory(dir, options, callback) {
         return done(null);
       }
 
-      ignoreFiles = options.ignoreFiles;
-      var isIgnored = filterByIgnore(filename, ignoreFiles);
-
-      if (isIgnored) {
-        console.log("isIgnored: " + JSON.stringify(filename));
-        return done(null);
+      var ignoreFiles = options.ignoreFiles;
+      if (ignoreFiles != null) {
+        var isIgnored = filterByIgnore(filename, ignoreFiles);
+        if (isIgnored) {
+          console.log("isIgnored: " + JSON.stringify(filename));
+          return done(null);
+        }
       }
 
       var relpath = filename.substr(dir.length).replace(/^\//, '');
