@@ -17,7 +17,7 @@ compile('/my/couch/app', function(err, doc) {
 When `options.multipart` is true, attachments are handled as multipart.
 
 If you populate options.ignoreFiles, it will ignore the contents of a .couchappignore file. This is useful in
-[grunt-couch](https://github.com/chrisekelley/grunt-couch)
+[grunt-couch](https://github.com/jo/grunt-couch)
 
     var ignoreFiles = grunt.file.read('.couchappignore')
     var ignoreFilesArr = ignoreFiles.split('\n')
