@@ -3,11 +3,14 @@ var compile = require('..');
 var fs = require('fs');
 var path = require('path');
 var async = require('async');
+var glob = require('glob');
+var EXPECTED_DIR = path.join(__dirname, 'expected');
+var FIXTURES_DIR = path.join(__dirname, 'fixtures');
 
 function testFile(file) {
   test(file, function(t) {
-    compile(path.join(__dirname, 'fixtures', file), function(err, doc) {
-      var expected = require(path.join(__dirname, 'expected', file + '.json'));
+    compile(file, function(err, doc) {
+      var expected = require(path.join(EXPECTED_DIR, path.relative(FIXTURES_DIR, file)));
 
       // console.log(JSON.stringify(doc, '', '  '));
 
@@ -26,7 +29,7 @@ if (process.argv[2]) {
   return testFile(process.argv[2]);
 }
 
-fs.readdir(path.join(__dirname, 'fixtures'), function(err, files) {
+glob(path.join(FIXTURES_DIR, '{_design/*,_local/*,[^_].*}'), function(err, files) {
   if (err) {
     return console.log(err);
   }

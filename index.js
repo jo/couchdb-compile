@@ -7,6 +7,9 @@ var glob = require('glob');
 var mime = require('mime');
 var async = require('async');
 
+var RESERVED_DOCID_PREFIXES = ['_design', '_local'];
+
+
 // Recursively transform an object into a JSON compatible representation
 // and preserve methods by calling toString() on the function objects.
 function objToJson(obj) {
@@ -21,6 +24,19 @@ function objToJson(obj) {
 
     return memo;
   }, {});
+}
+
+// Get the id from filename. Respect parent directory name
+// if and only if it is _design or _local.
+function idFromFilename(filename) {
+  var basename = path.basename(filename);
+  var root = path.basename(path.dirname(filename));
+
+  if (RESERVED_DOCID_PREFIXES.indexOf(root) === -1) {
+    return basename;
+  }
+
+  return path.join(root, basename);
 }
 
 // Compile a Couchapp module.
@@ -134,6 +150,10 @@ function compileDirectory(dir, options, callback) {
     async.each(filenames, readFile, function(err) {
       if (err) {
         return callback(err);
+      }
+
+      if (!doc._id) {
+        doc._id = idFromFilename(dir);
       }
 
       if (options.multipart) {
