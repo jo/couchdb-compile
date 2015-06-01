@@ -1,7 +1,8 @@
 # couch-compile
 Build CouchDB documents from directory, JSON or module.
 
-[![Build Status](https://travis-ci.org/jo/couch-compile.svg?branch=master)](http://travis-ci.org/jo/couch-compile)
+[![Build
+Status](https://travis-ci.org/jo/couch-compile.svg?branch=master)](http://travis-ci.org/jo/couch-compile)
 
 ```js
 var compile = require('couch-compile');
@@ -20,7 +21,8 @@ When `options.multipart` is true, attachments are handled as multipart.
 `callback` is called with two arguments: `error` and `doc`.
 In case `options.multipart` is set, `callback` is called with a third argument:
 `attachments`. This is a multipart attachments array as required by
-[nanos `db.multipart.insert`](https://github.com/dscape/nano#dbmultipartinsertdoc-attachments-params-callback):
+[nanos
+`db.multipart.insert`](https://github.com/dscape/nano#dbmultipartinsertdoc-attachments-params-callback):
 ```js
 {
   name: 'rabbit.png',
@@ -44,9 +46,11 @@ couch-compile /my/couch/app
 
 
 ## The Couch Directory Tree
-`couch-compile` uses a filesystem mapping similar to [Couchapp python tool](http://couchapp.org/page/couchapp-python)
-and [Erika](https://github.com/benoitc/erica):
-[The Couchapp Filesystem Mapping](http://couchapp.org/page/filesystem-mapping).
+`couch-compile` uses a filesystem mapping similar to [Couchapp python
+tool](https://github.com/couchapp/couchapp) and
+[Erika](https://github.com/benoitc/erica):
+[The Couchapp Filesystem
+Mapping](https://github.com/couchapp/couchapp/wiki/Complete-Filesystem-to-Design-Doc-Mapping-Example).
 
 It is quite self-explanatory. For example:
 
@@ -101,7 +105,8 @@ They become attachment entries of the form
 The `content\_type` is computed using [mime](https://github.com/broofa/node-mime).
 `data` is the base64 encoded value of the file.
 
-Read more about [Inline Attachments](http://wiki.apache.org/couchdb/HTTP_Document_API#Inline_Attachments).
+Read more about [Inline
+Attachments](http://wiki.apache.org/couchdb/HTTP_Document_API#Inline_Attachments).
 
 
 ## Testing
