@@ -1,11 +1,11 @@
-# couch-compile
+# couchdb-compile
 Build CouchDB documents from directory, JSON or module.
 
 [![Build
-Status](https://travis-ci.org/jo/couch-compile.svg?branch=master)](http://travis-ci.org/jo/couch-compile)
+Status](https://travis-ci.org/jo/couchdb-compile.svg?branch=master)](http://travis-ci.org/jo/couchdb-compile)
 
 ```js
-var compile = require('couch-compile');
+var compile = require('couchdb-compile');
 compile('/my/couch/app', function(err, doc) {
   // push
 });
@@ -13,6 +13,10 @@ compile('/my/couch/app', function(err, doc) {
 
 ## Usage
 `compile(directory, [options], callback)`
+
+### `directory`
+Can be a [CouchDB Directory Tree](#the-couchdb-directory-tree) (see below), a
+JSON file or a CommonJS module.
 
 ### `Options`
 When `options.multipart` is true, attachments are handled as multipart.
@@ -36,17 +40,17 @@ In case `options.multipart` is set, `callback` is called with a third argument:
 ## CLI
 A simple commandline client is included:
 ```shell
-npm install -g couch-compile
+npm install -g couchdb-compile
 ```
 
 Give it a directory, or use the current one:
 ```shell
-couch-compile /my/couch/app
+couchdb-compile /my/couch/app
 ```
 
 
-## The Couch Directory Tree
-`couch-compile` uses a filesystem mapping similar to [Couchapp python
+## The CouchDB Directory Tree
+`couchdb-compile` uses a filesystem mapping similar to [Couchapp python
 tool](https://github.com/couchapp/couchapp) and
 [Erika](https://github.com/benoitc/erica):
 [The Couchapp Filesystem

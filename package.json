@@ -1,17 +1,15 @@
 {
-  "name": "couch-compile",
+  "name": "couchdb-compile",
   "version": "1.4.0",
   "description": "Build CouchDB documents from fs.",
   "main": "index.js",
-  "bin": {
-    "couch-compile": "./cli.js"
-  },
+  "bin": "cli.js",
   "scripts": {
     "test": "tap test/*.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jo/couch-compile"
+    "url": "https://github.com/jo/couchdb-compile"
   },
   "keywords": [
     "couchdb",
@@ -20,9 +18,9 @@
   "author": "Johannes J. Schmidt",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jo/couch-compile/issues"
+    "url": "https://github.com/jo/couchdb-compile/issues"
   },
-  "homepage": "https://github.com/jo/couch-compile",
+  "homepage": "https://github.com/jo/couchdb-compile",
   "dependencies": {
     "mime": "^1.2.11",
     "async": "^0.2.10",
