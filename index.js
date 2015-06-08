@@ -28,8 +28,8 @@ function objToJson(obj) {
 
 // Get the id from filename. Respect parent directory name
 // if and only if it is _design or _local.
-function idFromFilename(filename) {
-  var basename = path.basename(filename);
+function idFromFilename(filename, ext) {
+  var basename = path.basename(filename, ext);
   var root = path.basename(path.dirname(filename));
 
   if (RESERVED_DOCID_PREFIXES.indexOf(root) === -1) {
@@ -54,17 +54,35 @@ function compileModule(filename, options, callback) {
     return callback(err);
   }
   
+  if (!doc._id) {
+    doc._id = idFromFilename(filename, '.js');
+  }
+
   callback(null, doc);
 }
 
 // Read and parse JSON documents.
 function compileJSON(filename, options, callback) {
-  fs.readFile(filename, function(err, data) {
+  fs.readFile(filename, function(err, doc) {
     if (err) {
       return callback(err);
     }
 
-    callback(null, JSON.parse(data));
+    try {
+      doc = JSON.parse(doc);
+    } catch (e) {
+      err = e;
+    }
+
+    if (err) {
+      return callback(err);
+    }
+
+    if (!doc._id) {
+      doc._id = idFromFilename(filename, '.json');
+    }
+
+    callback(null, doc);
   });
 }
 

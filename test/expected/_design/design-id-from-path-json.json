@@ -1,0 +1,4 @@
+{
+  "_id": "_design/design-id-from-path-json",
+  "foo": "bar"
+}
