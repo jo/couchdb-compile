@@ -59,7 +59,7 @@ Mapping](https://github.com/couchapp/couchapp/wiki/Complete-Filesystem-to-Design
 
 It is quite self-explanatory. For example:
 
-```shell
+```sh
 myapp
 ├── _id
 ├── language
@@ -84,6 +84,12 @@ becomes:
 ```
 
 See `test/fixtures` and `test/expected` for usage examples.
+
+
+### `_id`
+
+If you do not include an `_id` property, the filename will be used.
+
 
 ### File Extensions
 For property names file extensions will be stripped:
