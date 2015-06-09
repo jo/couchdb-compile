@@ -86,7 +86,7 @@ becomes:
 See `test/fixtures` and `test/expected` for usage examples.
 
 
-### `_id`
+### IDs
 
 If you do not include an `_id` property, the filename will be used.
 
