@@ -4,29 +4,18 @@ Build CouchDB documents from directory, JSON or module.
 [![Build
 Status](https://travis-ci.org/jo/couchdb-compile.svg?branch=master)](http://travis-ci.org/jo/couchdb-compile)
 
-```js
-var compile = require('couchdb-compile');
-compile('/my/couch/app', function(err, doc) {
-  // push
-});
-```
 
-## Usage
-`compile(directory, [options], callback)`
+## API
+`compile(source[, options], callback)`
 
-### `directory`
-Can be a [CouchDB Directory Tree](#the-couchdb-directory-tree) (see below), a
-JSON file or a CommonJS module.
+* `source` - Can be a [CouchDB Directory Tree](#the-couchdb-directory-tree) (see below), a JSON file or a CommonJS module
+* `options.multipart` - When set to `true`, attachments are handled as multipart
+* `callback` - called when done with two arguments: `error` and `doc`.
 
-### `Options`
-When `options.multipart` is true, attachments are handled as multipart.
-
-### `callback`
-`callback` is called with two arguments: `error` and `doc`.
 In case `options.multipart` is set, `callback` is called with a third argument:
-`attachments`. This is a multipart attachments array as required by
-[nanos
+`attachments`. This is a multipart attachments array as required by [nanos
 `db.multipart.insert`](https://github.com/dscape/nano#dbmultipartinsertdoc-attachments-params-callback):
+
 ```js
 {
   name: 'rabbit.png',
@@ -37,17 +26,29 @@ In case `options.multipart` is set, `callback` is called with a third argument:
 `data` can be a `Buffer` or a `String`.
 
 
+### Example
+
+```js
+var compile = require('couchdb-compile');
+compile('project/couchdb', function(error, doc) {
+  // doc is a compile object now
+});
+```
+
+
 ## CLI
-A simple commandline client is included:
-```shell
-npm install -g couchdb-compile
+
+```sh
+couchdb-compile [SOURCE]
 ```
 
-Give it a directory, or use the current one:
-```shell
-couchdb-compile /my/couch/app
-```
+When `SOURCE` is omitted, the current directory will be used.  
 
+### Example
+
+```sh
+couchdb-compile project/couchdb
+```
 
 ## The CouchDB Directory Tree
 `couchdb-compile` uses a filesystem mapping similar to [Couchapp python
@@ -113,9 +114,9 @@ Read more about [Inline
 Attachments](http://wiki.apache.org/couchdb/HTTP_Document_API#Inline_Attachments).
 
 
-## Testing
-Run the testsuite with
-```shell
+## Tests
+
+```sh
 npm test
 ```
 
