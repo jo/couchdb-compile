@@ -1,4 +1,4 @@
-var test = require('tap').test;
+var test = require('tape');
 var compile = require('..');
 var fs = require('fs');
 var path = require('path');
@@ -8,9 +8,11 @@ var EXPECTED_DIR = path.join(__dirname, 'expected');
 var FIXTURES_DIR = path.join(__dirname, 'fixtures');
 
 function testFile(file) {
-  test(file, function(t) {
+  var relative = path.relative(FIXTURES_DIR, file);
+
+  test(relative, function(t) {
     compile(file, function(err, doc) {
-      var expected = require(path.join(EXPECTED_DIR, path.relative(FIXTURES_DIR, file)));
+      var expected = require(path.join(EXPECTED_DIR, relative));
 
       // console.log(JSON.stringify(doc, '', '  '));
 
@@ -18,15 +20,11 @@ function testFile(file) {
         console.log(err);
       }
 
-      t.notOk(err, 'no error should have occured during compile "' + file + '"')
-      t.deepEqual(doc, expected, 'should have compiled "' + file + '"');
+      t.notOk(err, 'no error should have occured during compile')
+      t.deepEqual(doc, expected, 'should have compiled correct result');
       t.end();
     });
   });
-}
-
-if (process.argv[2]) {
-  return testFile(process.argv[2]);
 }
 
 glob(path.join(FIXTURES_DIR, '{_design/*,_local/*,[^_]*}'), function(err, files) {

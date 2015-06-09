@@ -5,7 +5,7 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tape test/*.js | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "glob": "^3.2.11"
   },
   "devDependencies": {
-    "tap": "~0.4.8"
+    "tap-spec": "^3.0.0",
+    "tape": "^4.0.0"
   }
 }

@@ -183,6 +183,24 @@ function compileDirectory(dir, options, callback) {
   });
 };
 
+function hasIndex(source, callback) {
+  var filename = path.join(source, 'index.js');
+
+  fs.stat(filename, function(err, stats) {
+    if (err && err.code === 'ENOENT') {
+      return callback(null, false);
+    }
+
+    if (err) {
+      return callback(err);
+    }
+
+    if (stats.isFile()) {
+      return callback(null, true);
+    }
+  })
+}
+
 // Compile `source`, which can be
 // * JSON file
 // * JavaScript module
@@ -203,7 +221,17 @@ module.exports = function compile(source, options, callback) {
     }
 
     if (stats.isDirectory()) {
-      return compileDirectory(source, options, callback);
+      return hasIndex(source, function(err, answer) {
+        if (err) {
+          return callback(err);
+        }
+
+        if (answer) {
+          return compileModule(source, options, callback);
+        }
+
+        compileDirectory(source, options, callback);
+      });
     }
     
     if (!stats.isFile()) {
