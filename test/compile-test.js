@@ -29,7 +29,7 @@ if (process.argv[2]) {
   return testFile(process.argv[2]);
 }
 
-glob(path.join(FIXTURES_DIR, '{_design/*,_local/*,[^_].*}'), function(err, files) {
+glob(path.join(FIXTURES_DIR, '{_design/*,_local/*,[^_]*}'), function(err, files) {
   if (err) {
     return console.log(err);
   }
