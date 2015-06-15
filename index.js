@@ -183,7 +183,11 @@ function compileDirectory(dir, options, callback) {
   });
 };
 
-function hasIndex(source, callback) {
+function useIndex(source, options, callback) {
+  if (!options.index) {
+    return callback(null, false);
+  }
+
   var filename = path.join(source, 'index.js');
 
   fs.stat(filename, function(err, stats) {
@@ -211,6 +215,7 @@ module.exports = function compile(source, options, callback) {
     options = {};
   }
   options = options || {};
+  options.index = 'index' in options ? options.index : false;
 
   // resolve absolute path
   source = path.resolve(process.cwd(), source);
@@ -221,7 +226,7 @@ module.exports = function compile(source, options, callback) {
     }
 
     if (stats.isDirectory()) {
-      return hasIndex(source, function(err, answer) {
+      return useIndex(source, options, function(err, answer) {
         if (err) {
           return callback(err);
         }

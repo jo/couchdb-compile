@@ -11,7 +11,7 @@ function testFile(file) {
   var relative = path.relative(FIXTURES_DIR, file);
 
   test(relative, function(t) {
-    compile(file, function(err, doc) {
+    compile(file, { index: true }, function(err, doc) {
       var expected = require(path.join(EXPECTED_DIR, relative));
 
       // console.log(JSON.stringify(doc, '', '  '));

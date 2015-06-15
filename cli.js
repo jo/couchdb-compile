@@ -1,11 +1,14 @@
 #!/usr/bin/env node
-
+var minimist = require('minimist')
 var compile = require('./')
 
-var args = process.argv.slice(2)
-var source = args[0] || process.cwd()
+var options = minimist(process.argv.slice(2), {
+  boolean: ['index', 'multipart']
+})
 
-compile(source, function(error, response) {
+var source = options._[0] || process.cwd()
+
+compile(source, options, function(error, response) {
   if (error) return console.error(error)
 
   console.log(JSON.stringify(response, null, '  '))

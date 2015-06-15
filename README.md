@@ -9,7 +9,8 @@ Status](https://travis-ci.org/jo/couchdb-compile.svg?branch=master)](http://trav
 `compile(source[, options], callback)`
 
 * `source` - Can be a [CouchDB Directory Tree](#the-couchdb-directory-tree) (see below), a JSON file or a CommonJS module
-* `options.multipart` - When set to `true`, attachments are handled as multipart
+* `options.index` - When set to `true`, folders are searched for `index.js`, which, if present, is treated as CommonJS module. Default is `false`.
+* `options.multipart` - When set to `true`, attachments are handled as multipart. Default is `false`.
 * `callback` - called when done with two arguments: `error` and `doc`.
 
 In case `options.multipart` is set, `callback` is called with a third argument:
@@ -39,10 +40,11 @@ compile('project/couchdb', function(error, doc) {
 ## CLI
 
 ```sh
-couchdb-compile [SOURCE]
+couchdb-compile [SOURCE] [OPTIONS]
 ```
 
 When `SOURCE` is omitted, the current directory will be used.  
+`OPTIONS` can be `--index` or `--multipart`, see above.
 
 ### Example
 

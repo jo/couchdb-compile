@@ -22,9 +22,10 @@
   },
   "homepage": "https://github.com/jo/couchdb-compile",
   "dependencies": {
-    "mime": "^1.2.11",
     "async": "^0.2.10",
-    "glob": "^3.2.11"
+    "glob": "^3.2.11",
+    "mime": "^1.2.11",
+    "minimist": "^1.1.1"
   },
   "devDependencies": {
     "tap-spec": "^3.0.0",
