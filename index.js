@@ -36,7 +36,7 @@ function idFromFilename(filename, ext) {
     return basename;
   }
 
-  return path.join(root, basename);
+  return root + '/' + basename;
 }
 
 // Compile a Couchapp module.
