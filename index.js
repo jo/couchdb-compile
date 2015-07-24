@@ -16,7 +16,7 @@ function objToJson(obj) {
   return Object.keys(obj).reduce(function(memo, key) {
     if (typeof obj[key] === 'function') {
       memo[key] = obj[key].toString();
-    } else if (typeof obj[key] === 'object') {
+    } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
       memo[key] = objToJson(obj[key]);
     } else {
       memo[key] = obj[key];
@@ -53,7 +53,7 @@ function compileModule(filename, options, callback) {
   if (err) {
     return callback(err);
   }
-  
+
   if (!doc._id) {
     doc._id = idFromFilename(filename, '.js');
   }
@@ -90,7 +90,7 @@ function compileJSON(filename, options, callback) {
 function compileDirectory(dir, options, callback) {
   var doc = {};
   var attachments = [];
-  
+
   function readFile(filename, done) {
     fs.stat(filename, function(err, stats) {
       if (err) {
@@ -238,7 +238,7 @@ module.exports = function compile(source, options, callback) {
         compileDirectory(source, options, callback);
       });
     }
-    
+
     if (!stats.isFile()) {
       return callback({ error: 'not a file: ' + source });
     }
