@@ -38,3 +38,12 @@ glob(path.join(FIXTURES_DIR, '{_design/*,_local/*,[^_]*}'), function(err, files)
     }
   });
 });
+
+test('array value from common-js', function (t) {
+  var fixturesPath = path.join(FIXTURES_DIR, 'array-example.js')
+  console.log(fixturesPath)
+  compile(fixturesPath, { index: true }, function (err, doc) {
+    t.ok(Array.isArray(doc.array), 'parses Array correctly')
+    t.end();
+  })
+})
