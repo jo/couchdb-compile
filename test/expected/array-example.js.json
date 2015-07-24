@@ -1,0 +1,7 @@
+{
+  "_id": "array-example",
+  "array": [
+    "foo",
+    "bar"
+  ]
+}
