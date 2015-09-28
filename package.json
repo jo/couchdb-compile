@@ -1,11 +1,11 @@
 {
   "name": "couchdb-compile",
-  "version": "1.5.5",
   "description": "Build CouchDB documents from fs.",
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "tape test/*.js | tap-spec"
+    "test": "tape test/*.js | tap-spec",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "tap-spec": "^3.0.0",
-    "tape": "^4.0.0"
+    "tape": "^4.0.0",
+    "semantic-release": "^4.3.5"
   }
 }
