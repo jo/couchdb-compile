@@ -55,7 +55,7 @@ couchdb-compile project/couchdb
 ## The CouchDB Directory Tree
 `couchdb-compile` uses a filesystem mapping similar to [Couchapp python
 tool](https://github.com/couchapp/couchapp) and
-[Erika](https://github.com/benoitc/erica):
+[Erica](https://github.com/benoitc/erica):
 [The Couchapp Filesystem
 Mapping](https://github.com/couchapp/couchapp/wiki/Complete-Filesystem-to-Design-Doc-Mapping-Example).
 
