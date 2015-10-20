@@ -44,7 +44,7 @@ couchdb-compile [SOURCE] [OPTIONS]
 ```
 
 When `SOURCE` is omitted, the current directory will be used.  
-`OPTIONS` can be `--index` or `--multipart`, see above.
+`OPTIONS` can be `--index`, see above.
 
 ### Example
 

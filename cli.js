@@ -3,8 +3,10 @@ var minimist = require('minimist')
 var compile = require('./')
 
 var options = minimist(process.argv.slice(2), {
-  boolean: ['index', 'multipart']
+  boolean: ['index']
 })
+
+options.multipart = false
 
 var source = options._[0] || process.cwd()
 
