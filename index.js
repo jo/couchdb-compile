@@ -165,6 +165,8 @@ function compileDirectory(dir, options, callback) {
       return callback(err);
     }
 
+    filenames.sort();
+
     async.each(filenames, readFile, function(err) {
       if (err) {
         return callback(err);
