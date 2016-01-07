@@ -1,3 +1,5 @@
+require('coffee-script/register');
+
 var test = require('tape');
 var compile = require('..');
 var fs = require('fs');
