@@ -185,7 +185,7 @@ function compileDirectory(dir, options, callback) {
 
 function useIndex(source, options, callback) {
   if (!options.index) {
-    return callback(null, false);
+    return callback(null, null);
   }
 
   var filename = path.join(source, 'index.js');
