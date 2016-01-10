@@ -1,0 +1,10 @@
+{
+  "_id": "_design/full",
+  "language": "coffeescript",
+  "views": {
+    "numbers": {
+      "map": "(doc) -> emit doc.number, null if doc.number",
+      "reduce": "_count"
+    }
+  }
+}

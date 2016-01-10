@@ -40,7 +40,7 @@ function idFromFilename(filename, ext) {
 }
 
 // Compile a Couchapp module.
-function compileModule(filename, options, callback) {
+function compileModule(extension, filename, options, callback) {
   var doc;
   var err;
 
@@ -55,7 +55,7 @@ function compileModule(filename, options, callback) {
   }
 
   if (!doc._id) {
-    doc._id = idFromFilename(filename, '.js');
+    doc._id = idFromFilename(filename, extension);
   }
 
   callback(null, doc);
@@ -185,14 +185,30 @@ function compileDirectory(dir, options, callback) {
 
 function useIndex(source, options, callback) {
   if (!options.index) {
-    return callback(null, false);
+    return callback(null, null);
   }
 
   var filename = path.join(source, 'index.js');
 
   fs.stat(filename, function(err, stats) {
     if (err && err.code === 'ENOENT') {
-      return callback(null, false);
+      filename = path.join(source, 'index.coffee');
+
+      fs.stat(filename, function(err, stats) {
+        if (err && err.code === 'ENOENT') {
+          return callback(null, null);
+        }
+
+        if (err) {
+          return callback(err);
+        }
+
+        if (stats.isFile()) {
+          return callback(null, '.coffee');
+        }
+      })
+
+      return;
     }
 
     if (err) {
@@ -200,7 +216,7 @@ function useIndex(source, options, callback) {
     }
 
     if (stats.isFile()) {
-      return callback(null, true);
+      return callback(null, '.js');
     }
   })
 }
@@ -226,13 +242,13 @@ module.exports = function compile(source, options, callback) {
     }
 
     if (stats.isDirectory()) {
-      return useIndex(source, options, function(err, answer) {
+      return useIndex(source, options, function(err, ext) {
         if (err) {
           return callback(err);
         }
 
-        if (answer) {
-          return compileModule(source, options, callback);
+        if (null !== ext) {
+          return compileModule(ext, source, options, callback);
         }
 
         compileDirectory(source, options, callback);
@@ -245,9 +261,10 @@ module.exports = function compile(source, options, callback) {
 
     var ext = path.extname(source);
 
-    switch (path.extname(source)) {
+    switch (ext) {
       case '.js':
-        compileModule(source, options, callback);
+      case '.coffee':
+        compileModule(ext, source, options, callback);
         break;
 
       case '.json':
