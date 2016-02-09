@@ -1,1 +1,1 @@
-exports.hello = 'Hello World';
+exports.hello = 'Hello World'

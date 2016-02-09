@@ -1,14 +1,14 @@
-function(head, req) {
-  var row;
+function (head, req) {
+  var row
   start({
     headers: {
       'Content-Type': 'text/html'
     }
-  });
-  send('<!DOCTYPE html><html lang=en>');
-  send('<ol>');
+  })
+  send('<!DOCTYPE html><html lang=en>')
+  send('<ol>')
   while(row = getRow()) {
-    send('<li>' + row.key + '</li>');
+    send('<li>' + row.key + '</li>')
   }
-  send('</ol>');
+  send('</ol>')
 }

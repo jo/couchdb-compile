@@ -10,7 +10,7 @@ options.multipart = false
 
 var source = options._[0] || process.cwd()
 
-compile(source, options, function(error, response) {
+compile(source, options, function (error, response) {
   if (error) return console.error(error)
 
   console.log(JSON.stringify(response, null, '  '))

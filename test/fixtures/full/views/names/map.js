@@ -1,5 +1,5 @@
-function(doc) {
+function (doc) {
   if (doc.name) {
-    emit(doc.name, null);
+    emit(doc.name, null)
   }
 }

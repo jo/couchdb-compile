@@ -1,3 +1,3 @@
-function(doc, req) {
-  return doc.type === 'doc';
+function (doc, req) {
+  return doc.type === 'doc'
 }

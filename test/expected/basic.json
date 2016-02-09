@@ -3,7 +3,7 @@
   "language": "javascript",
   "views": {
     "numbers": {
-      "map": "function(doc) {\n  if (doc.number) {\n    emit(doc.number, null);\n  }\n}",
+      "map": "function (doc) {\n  if (doc.number) {\n    emit(doc.number, null)\n  }\n}",
       "reduce": "_count"
     }
   }
