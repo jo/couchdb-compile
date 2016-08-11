@@ -30,7 +30,7 @@
   "devDependencies": {
     "semantic-release": "^6.0.3",
     "standard": "^7.0.1",
-    "tap": "^5.4.3"
+    "tap": "^6.3.2"
   },
   "standard": {
     "ignore": [
