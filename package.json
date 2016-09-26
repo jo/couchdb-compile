@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "semantic-release": "^6.0.3",
-    "standard": "^7.0.1",
+    "standard": "^8.2.0",
     "tap": "^5.4.3"
   },
   "standard": {
