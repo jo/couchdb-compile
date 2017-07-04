@@ -44,12 +44,15 @@ couchdb-compile [SOURCE] [OPTIONS]
 ```
 
 When `SOURCE` is omitted, the current directory will be used.  
-`OPTIONS` can be `--index`, see above.
+`OPTIONS` can be `--index` and `--pretty`, see above.
+
+Use `--pretty` to get a pretty printed json output.
 
 ### Example
 
 ```sh
 couchdb-compile project/couchdb
+couchdb-compile project/couchdb --pretty
 ```
 
 ## The CouchDB Directory Tree
