@@ -106,7 +106,7 @@ For property names file extensions will be stripped:
 ```
 
 ### Attachments
-Files inside the `\_attachments` directory are handled special:
+Files inside the `_attachments` directory are handled special:
 They become attachment entries of the form
 
 ```js
@@ -118,7 +118,7 @@ They become attachment entries of the form
 }
 ```
 
-The `content\_type` is computed using [mime](https://github.com/broofa/node-mime).
+The `content_type` is computed using [mime](https://github.com/broofa/node-mime).
 `data` is the base64 encoded value of the file.
 
 Read more about [Inline
