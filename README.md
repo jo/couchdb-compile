@@ -118,8 +118,9 @@ They become attachment entries of the form
 }
 ```
 
-The `content_type` is computed using [mime](https://github.com/broofa/node-mime).
-`data` is the base64 encoded value of the file.
+The `content_type` is computed using
+[mime](https://github.com/broofa/node-mime), with a fallback to
+`application/octet-stream`.  `data` is the base64 encoded value of the file.
 
 Read more about [Inline
 Attachments](http://wiki.apache.org/couchdb/HTTP_Document_API#Inline_Attachments).
