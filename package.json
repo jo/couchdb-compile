@@ -4,7 +4,8 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "standard && tap --coverage test/*-test.js",
+    "test": "tap --reporter=spec test/*-test.js",
+    "pretest": "standard",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
