@@ -131,5 +131,5 @@ Attachments](http://wiki.apache.org/couchdb/HTTP_Document_API#Inline_Attachments
 npm test
 ```
 
-(c) 2014 Johannes J. Schmidt, TF  
+(c) 2014-2018 Johannes J. Schmidt
 Apache 2.0 License
