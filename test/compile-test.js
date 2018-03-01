@@ -43,3 +43,29 @@ test('array value from common-js', function (t) {
     t.end()
   })
 })
+
+test('compile called with object', function (t) {
+  var module = {
+    foo: 'bar'
+  }
+
+  compile(module, function (error, doc) {
+    t.error(error)
+    t.same(doc, module, 'passes module')
+    t.end()
+  })
+})
+
+test('compile called with object containing function', function (t) {
+  var module = {
+    foo: function () {}
+  }
+
+  compile(module, function (error, doc) {
+    t.error(error)
+    t.same(doc, {
+      foo: module.foo.toString()
+    }, 'stringifies function')
+    t.end()
+  })
+})

@@ -215,6 +215,8 @@ module.exports = function compile (source, options, callback) {
   options = options || {}
   options.index = 'index' in options ? options.index : false
 
+  if (typeof source === 'object') return callback(null, objToJson(source))
+
   // resolve absolute path
   source = path.resolve(process.cwd(), source)
 

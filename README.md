@@ -8,7 +8,7 @@ Status](https://travis-ci.org/jo/couchdb-compile.svg?branch=master)](http://trav
 ## API
 `compile(source[, options], callback)`
 
-* `source` - Can be a [CouchDB Directory Tree](#the-couchdb-directory-tree) (see below), a JSON file or a CommonJS module
+* `source` - Can be an object, a [CouchDB Directory Tree](#the-couchdb-directory-tree) (see below), a JSON file or a CommonJS module
 * `options.index` - When set to `true`, folders are searched for `index.js`, which, if present, is treated as CommonJS module. Default is `false`.
 * `options.multipart` - When set to `true`, attachments are handled as multipart. Default is `false`.
 * `callback` - called when done with two arguments: `error` and `doc`.
@@ -53,6 +53,25 @@ Use `--pretty` to get a pretty printed json output.
 ```sh
 couchdb-compile project/couchdb
 couchdb-compile project/couchdb --pretty
+```
+
+## Stringifying Functions
+
+If there is a function inside source (passed as object or path to CommonJS
+module), functions get stringified by calling `toString` on them.
+
+eg:
+
+```js
+compile({
+  foo: function () {
+    return 42
+  }
+}, (error, result) => {
+  // {
+  //   foo: 'function () {\n  return 42\n}'
+  // }
+})
 ```
 
 ## The CouchDB Directory Tree
