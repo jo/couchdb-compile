@@ -116,7 +116,7 @@ function compileDirectory (dir, options, callback) {
         if (parts[0] === '_attachments') {
           parts.shift()
           var name = parts.join('/')
-          var contentType = mime.lookup(filename)
+          var contentType = mime.getType(filename) || 'application/octet-stream'
 
           if (options.multipart) {
             attachments.push({
@@ -132,7 +132,7 @@ function compileDirectory (dir, options, callback) {
             }
           }
         } else {
-          var key = parts.pop().replace(/\.[^\.]*$/, '')
+          var key = parts.pop().replace(/\.[^.]*$/, '')
           var part = parts.reduce(function (result, key) {
             result[key] = result[key] || {}
             return result[key]
@@ -238,7 +238,7 @@ module.exports = function compile (source, options, callback) {
     }
 
     if (!stats.isFile()) {
-      return callback({ error: 'not a file: ' + source })
+      return callback(new Error('not a file: ' + source))
     }
 
     var ext = path.extname(source)
@@ -253,7 +253,7 @@ module.exports = function compile (source, options, callback) {
         break
 
       default:
-        callback({ error: 'unsupported extension: ' + source })
+        callback(new Error('unsupported extension: ' + source))
     }
   })
 }

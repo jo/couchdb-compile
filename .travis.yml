@@ -1,4 +1,3 @@
-sudo: false
 language: node_js
 cache:
   directories:
@@ -6,10 +5,11 @@ cache:
 notifications:
   email: false
 node_js:
-  - stable
+  - '9'
+  - '8'
+  - '6'
 after_success:
-  - npm run semantic-release
+  - npm run travis-deploy-once "npm run semantic-release"
 branches:
   except:
-    # ignore git tags created by semantic-release, like "v1.2.3"
     - /^v\d+\.\d+\.\d+$/
