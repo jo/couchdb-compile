@@ -40,5 +40,8 @@
       "test/fixtures/**/*"
     ]
   },
-  "version": "0.0.0-development"
+  "version": "0.0.0-development",
+  "release": {
+    "defaultBranch": "main"
+  }
 }
