@@ -1,13 +1,13 @@
 // couch-compile
 // (c) 2014 Johannes J. Schmidt
 
-var fs = require('fs')
-var path = require('path')
-var glob = require('glob')
-var mime = require('mime')
-var async = require('async')
+const fs = require('fs')
+const path = require('path')
+const glob = require('glob')
+const mime = require('mime')
+const async = require('async')
 
-var RESERVED_DOCID_PREFIXES = ['_design', '_local']
+const RESERVED_DOCID_PREFIXES = ['_design', '_local']
 
 // Recursively transform an object into a JSON compatible representation
 // and preserve methods by calling toString() on the function objects.
@@ -28,8 +28,8 @@ function objToJson (obj) {
 // Get the id from filename. Respect parent directory name
 // if and only if it is _design or _local.
 function idFromFilename (filename, ext) {
-  var basename = path.basename(filename, ext)
-  var root = path.basename(path.dirname(filename))
+  const basename = path.basename(filename, ext)
+  const root = path.basename(path.dirname(filename))
 
   if (RESERVED_DOCID_PREFIXES.indexOf(root) === -1) {
     return basename
@@ -40,8 +40,8 @@ function idFromFilename (filename, ext) {
 
 // Compile a Couchapp module.
 function compileModule (filename, options, callback) {
-  var doc
-  var err
+  let doc
+  let err
 
   try {
     doc = objToJson(require(filename))
@@ -87,8 +87,8 @@ function compileJSON (filename, options, callback) {
 
 // Compile a directory.
 function compileDirectory (dir, options, callback) {
-  var doc = {}
-  var attachments = []
+  const doc = {}
+  const attachments = []
 
   function readFile (filename, done) {
     fs.stat(filename, function (err, stats) {
@@ -101,10 +101,10 @@ function compileDirectory (dir, options, callback) {
         return done(null)
       }
 
-      var relpath = filename.substr(dir.length).replace(/^\//, '')
-      var parts = relpath.split('/')
-      var isAttachment = parts[0] === '_attachments'
-      var readOpts = {
+      const relpath = filename.substr(dir.length).replace(/^\//, '')
+      const parts = relpath.split('/')
+      const isAttachment = parts[0] === '_attachments'
+      const readOpts = {
         encoding: isAttachment ? null : 'utf8'
       }
 
@@ -115,8 +115,8 @@ function compileDirectory (dir, options, callback) {
 
         if (parts[0] === '_attachments') {
           parts.shift()
-          var name = parts.join('/')
-          var contentType = mime.getType(filename) || 'application/octet-stream'
+          const name = parts.join('/')
+          const contentType = mime.getType(filename) || 'application/octet-stream'
 
           if (options.multipart) {
             attachments.push({
@@ -132,8 +132,8 @@ function compileDirectory (dir, options, callback) {
             }
           }
         } else {
-          var key = parts.pop().replace(/\.[^.]*$/, '')
-          var part = parts.reduce(function (result, key) {
+          const key = parts.pop().replace(/\.[^.]*$/, '')
+          const part = parts.reduce(function (result, key) {
             result[key] = result[key] || {}
             return result[key]
           }, doc)
@@ -186,7 +186,7 @@ function useIndex (source, options, callback) {
     return callback(null, false)
   }
 
-  var filename = path.join(source, 'index.js')
+  const filename = path.join(source, 'index.js')
 
   fs.stat(filename, function (err, stats) {
     if (err && err.code === 'ENOENT') {
@@ -243,7 +243,7 @@ module.exports = function compile (source, options, callback) {
       return callback(new Error('not a file: ' + source))
     }
 
-    var ext = path.extname(source)
+    const ext = path.extname(source)
 
     switch (ext) {
       case '.js':
