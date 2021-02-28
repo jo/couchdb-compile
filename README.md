@@ -1,10 +1,6 @@
 # couchdb-compile
 Build CouchDB documents from directory, JSON or module.
 
-[![Build
-Status](https://travis-ci.org/jo/couchdb-compile.svg?branch=master)](http://travis-ci.org/jo/couchdb-compile)
-
-
 ## API
 `compile(source[, options], callback)`
 
