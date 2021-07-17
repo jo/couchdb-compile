@@ -15,7 +15,7 @@ function objToJson (obj) {
   return Object.keys(obj).reduce(function (memo, key) {
     if (typeof obj[key] === 'function') {
       memo[key] = obj[key].toString()
-    } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+    } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key]) && obj[key] !== null) {
       memo[key] = objToJson(obj[key])
     } else {
       memo[key] = obj[key]
