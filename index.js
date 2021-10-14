@@ -200,6 +200,8 @@ function useIndex (source, options, callback) {
     if (stats.isFile()) {
       return callback(null, true)
     }
+
+    return callback(null, false)
   })
 }
 
