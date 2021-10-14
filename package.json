@@ -4,7 +4,7 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "tap --reporter=spec test/*-test.js",
+    "test": "tap --reporter=spec --branches 80 --lines 85 --statements 85 test/*-test.js",
     "pretest": "standard",
     "semantic-release": "semantic-release"
   },
