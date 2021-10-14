@@ -34,6 +34,24 @@ glob(path.join(FIXTURES_DIR, '{_design/*,_local/*,[^_]*}'), function (error, fil
   })
 })
 
+test('compile with missing file', function (t) {
+  const fixturesPath = path.join(FIXTURES_DIR, 'unknow-module.js')
+
+  compile(fixturesPath, { index: true }, function (error, doc) {
+    t.ok(error, 'has error')
+    t.end()
+  })
+})
+
+test('compile with non-file', function (t) {
+  const fixturesPath = '/dev/null'
+
+  compile(fixturesPath, { index: true }, function (error, doc) {
+    t.ok(error, 'has error')
+    t.end()
+  })
+})
+
 test('array value from common-js', function (t) {
   const fixturesPath = path.join(FIXTURES_DIR, 'array-example.js')
 
