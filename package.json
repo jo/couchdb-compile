@@ -4,7 +4,7 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "tap --reporter=spec test/*-test.js",
+    "test": "tap --reporter=spec --branches 80 --lines 85 --statements 85 test/*-test.js",
     "pretest": "standard",
     "semantic-release": "semantic-release"
   },
@@ -23,16 +23,16 @@
   },
   "homepage": "https://github.com/jo/couchdb-compile",
   "dependencies": {
-    "async": "^3.2.0",
-    "glob": "^7.1.6",
+    "async": "^3.2.1",
+    "glob": "^7.2.0",
     "json-stable-stringify": "^1.0.1",
     "mime": "^2.5.2",
     "minimist": "^1.2.5"
   },
   "devDependencies": {
-    "semantic-release": "^17.4.0",
-    "standard": "^16.0.3",
-    "tap": "^14.11.0"
+    "semantic-release": "^18.0.0",
+    "standard": "^16.0.4",
+    "tap": "^15.0.10"
   },
   "standard": {
     "ignore": [
